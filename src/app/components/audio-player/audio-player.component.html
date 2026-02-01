@@ -1,0 +1,54 @@
+<div class="arcturus-container">
+  <header>
+    <h1>Arcturus Stream</h1>
+    <p>Conexão e Expansão de Consciência</p>
+    
+    <div class="search-container">
+      <div class="input-wrapper">
+        <input 
+          type="text" 
+          [(ngModel)]="searchTerm" 
+          (keyup.enter)="search()"
+          placeholder="Busque frequências ou meditações...">
+        
+        <span 
+          class="clear-icon" 
+          *ngIf="searchTerm" 
+          (click)="clearSearch()">
+          ✕
+        </span>
+      </div>
+
+      <button (click)="search()">Buscar</button>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div *ngFor="let item of contents">
+      <div class="card" *ngIf="item.description">
+        
+        <div class="energy-badge badge-external" *ngIf="item.energyType && item.energyType.includes('JAMENDO')">
+          ☁️ Descoberta Web
+        </div>
+
+        <div class="energy-badge badge-local" *ngIf="item.energyType && !item.energyType.includes('JAMENDO')">
+          💾 Minha Biblioteca
+        </div>
+
+        <h3>{{ item.description }}</h3>
+        <span class="frequency">{{ item.frequencyHz }} Hz</span>
+        
+        <audio [src]="item.s3Url" controls preload="metadata">
+          Seu navegador não suporta áudio.
+        </audio>
+
+        <button 
+          class="save-btn" 
+          *ngIf="item.energyType === 'JAMENDO_REAL'" 
+          (click)="importToLibrary(item)">
+          ❤️ Salvar na Biblioteca
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
