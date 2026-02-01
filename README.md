@@ -97,17 +97,19 @@ npm install
 ng serve
 
 ---
+## ☁️ Arquitetura de Deploy
 
-☁️ Arquitetura de Deploy
 O sistema opera em um ambiente 100% Cloud (Serverless/PaaS):
 
+```mermaid
 graph LR
-    A[Usuário / Browser] -- HTTPS --> B[Vercel (Angular)]
-    B -- REST API --> C[Render (Spring Boot)]
-    C -- SQL --> D[(Neon PostgreSQL)]
-    C -- Upload/Stream --> E[AWS S3 Bucket]
-    C -- External API --> F[Jamendo API]
-    
+A["Usuário / Browser"] -- HTTPS --> B["Vercel (Angular)"]
+    B -- REST API --> C["Render (Spring Boot)"]
+    C -- SQL --> D["Neon (PostgreSQL)"]
+    C -- Upload/Stream --> E["AWS S3 Bucket"]
+    C -- External API --> F["Jamendo API"]
+```
+
 ---
 
 👩‍💻 Autora
