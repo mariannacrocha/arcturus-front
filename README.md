@@ -74,6 +74,7 @@ O projeto foi construído com foco em **Arquitetura Distribuída**, **Clean Code
 * PostgreSQL
 
 ### 1. Backend (API)
+```bash
 
 # Clone o repositório da API
 git clone https://github.com/mariannacrocha/arcturus-api.git
@@ -95,7 +96,7 @@ npm install
 
 # Rode o servidor de desenvolvimento
 ng serve
-
+```
 ---
 ## ☁️ Arquitetura de Deploy
 
