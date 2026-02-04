@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
+import { environment } from '../../../environments/environment'; // 👈 Importante
 
 @Component({
   selector: 'app-library',
@@ -13,34 +14,30 @@ import { AuthService } from '../../services/auth';
 })
 export class LibraryComponent {
   contents: any[] = [];
+  // 🚀 URL Dinâmica
+  private apiUrl = `${environment.apiRoot}/v1/contents`;
 
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
     this.loadMyLibrary();
   }
 
   loadMyLibrary() {
-    // 1. Pega o Token que o Login salvou (O Crachá)
     const token = this.authService.getToken();
-
-    // Se não tiver token, manda logar
     if (!token) {
       this.router.navigate(['/login']);
       return;
     }
 
-    // 2. Prepara o cabeçalho com o Token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    // 3. Envia o pedido COM O HEADER para o Java saber quem é você
-    this.http.get<any[]>('http://localhost:8080/v1/contents', { headers }) 
+    this.http.get<any[]>(this.apiUrl, { headers }) 
       .subscribe({
         next: (data) => {
           this.contents = data;
           console.log("Minha biblioteca carregada:", data);
         },
         error: (err) => {
-          console.error('Erro ao carregar biblioteca', err);
-          // Se der erro 403/401, o token venceu
+          console.error('Erro', err);
           if (err.status === 403 || err.status === 401) {
              alert("Sua sessão expirou. Faça login novamente.");
              this.authService.logout();
@@ -50,16 +47,13 @@ export class LibraryComponent {
   }
 
   deleteContent(id: string) {
-    if (!confirm('Remover esta música da biblioteca?')) return;
-
+    if (!confirm('Remover?')) return;
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    this.http.delete(`http://localhost:8080/v1/contents/${id}`, { headers })
+    this.http.delete(`${this.apiUrl}/${id}`, { headers })
       .subscribe({
-        next: () => {
-          this.contents = this.contents.filter(item => item.id !== id);
-        },
+        next: () => this.contents = this.contents.filter(item => item.id !== id),
         error: () => alert('Erro ao deletar.')
       });
   }

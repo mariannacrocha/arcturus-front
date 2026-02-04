@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/v1/contents'
+  // A raiz do servidor no seu computador
+  apiRoot: 'http://localhost:8080'
 };

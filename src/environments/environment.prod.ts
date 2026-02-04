@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://arcturus-api-hpv4.onrender.com/v1/contents' 
+  // A raiz do servidor no Render (SEM a barra no final)
+  apiRoot: 'https://arcturus-api-hpv4.onrender.com'
 };

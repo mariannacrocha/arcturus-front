@@ -1,33 +1,35 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Necessário para o @for e *ngIf
-import { FormsModule } from '@angular/forms';   // Necessário para o [(ngModel)] do input
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
+import { environment } from '../../../environments/environment'; // 👈 Importante
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule], // 👈 Importante: Módulos visuais
-  templateUrl: './home.html',           // ⚠️ Verifique se o seu arquivo chama 'home.html' ou 'home.component.html'
-  styleUrl: './home.css'                // ⚠️ Verifique se o seu arquivo chama 'home.css' ou 'home.component.css'
+  imports: [CommonModule, FormsModule],
+  templateUrl: './home.html',
+  styleUrl: './home.css'
 })
 export class HomeComponent {
   searchQuery: string = '';
   contents: any[] = [];
   
-  // Injeção de dependências: HTTP para buscar músicas, Auth para sair, Router se precisar navegar
+  // 🚀 Define a base da URL de conteúdos dinamicamente
+  private apiUrl = `${environment.apiRoot}/v1/contents`;
+
   constructor(
     private http: HttpClient, 
     private authService: AuthService,
     public router: Router
   ) {
-    this.loadContents(); // Carrega as músicas ao abrir a página
+    this.loadContents();
   }
 
-  // 1. Carregar lista inicial (Do seu banco)
   loadContents() {
-    this.http.get<any[]>('http://localhost:8080/v1/contents')
+    this.http.get<any[]>(this.apiUrl)
       .subscribe({
         next: (data) => {
           this.contents = data;
@@ -37,40 +39,30 @@ export class HomeComponent {
       });
   }
 
-  // 2. Buscar (Híbrido: Banco + Jamendo)
   onSearch() {
     if (!this.searchQuery.trim()) {
-      this.loadContents(); // Se estiver vazio, carrega tudo
+      this.loadContents();
       return;
     }
 
-    console.log('Buscando por:', this.searchQuery);
-    
-    this.http.get<any[]>(`http://localhost:8080/v1/contents/search?q=${this.searchQuery}`)
+    const token = this.authService.getToken(); 
+    const headers = token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : undefined;
+
+    this.http.get<any[]>(`${this.apiUrl}/search?q=${this.searchQuery}`, { headers })
       .subscribe({
-        next: (data) => {
-          this.contents = data;
-        },
+        next: (data) => this.contents = data,
         error: (err) => console.error('Erro na busca', err)
       });
   }
 
-  // 3. Função de Logout (Botão Sair)
   onLogout() {
     this.authService.logout();
   }
-
-  // 4. Salvar música (Importar) - Vamos implementar depois, deixei pronto para não dar erro no HTML
+  
   importContent(music: any) {
-    console.log('Botão de salvar clicado para:', music.description);
-    
-    // Recupera o Token
     const token = this.authService.getToken();
-    
-    // Cria o cabeçalho com o Token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    // Monta o objeto para enviar
     const body = {
       description: music.description,
       s3Url: music.s3Url,
@@ -78,39 +70,22 @@ export class HomeComponent {
       energyType: music.energyType || 'OTHER'
     };
 
-    // Envia para o Backend
-    this.http.post('http://localhost:8080/v1/contents/import', body, { headers })
+    this.http.post(`${this.apiUrl}/import`, body, { headers })
       .subscribe({
-        next: (res) => {
-          alert('Música salva na sua biblioteca! 💾');
-          // Opcional: Recarregar a lista para mostrar que agora é "interna"
-          // this.onSearch(); 
-        },
-        error: (err) => {
-          console.error('Erro ao salvar', err);
-          alert('Erro ao salvar música.');
-        }
+        next: (res) => alert('Música salva! 💾'),
+        error: (err) => alert('Erro ao salvar música.')
       });
   }
-  
-  deleteContent(id: string) {
-    if (!confirm('Tem certeza que deseja remover esta música da sua biblioteca?')) {
-      return;
-    }
 
+  deleteContent(id: string) {
+    if (!confirm('Remover esta música?')) return;
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    this.http.delete(`http://localhost:8080/v1/contents/${id}`, { headers })
+    this.http.delete(`${this.apiUrl}/${id}`, { headers })
       .subscribe({
-        next: () => {
-          // Remove a música da lista visualmente sem precisar recarregar a página
-          this.contents = this.contents.filter(item => item.id !== id);
-        },
-        error: (err) => {
-          console.error('Erro ao deletar', err);
-          alert('Não foi possível deletar a música.');
-        }
+        next: () => this.contents = this.contents.filter(item => item.id !== id),
+        error: (err) => alert('Erro ao deletar.')
       });
   }
 }
