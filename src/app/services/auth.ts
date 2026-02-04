@@ -12,8 +12,7 @@ interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  // 🚀 CORREÇÃO: Usa a URL do ambiente + /auth
-  // Em prod vira: https://...onrender.com/auth
+
   private apiUrl = `${environment.apiRoot}/auth`;
 
   isLoggedIn = signal<boolean>(this.hasToken());

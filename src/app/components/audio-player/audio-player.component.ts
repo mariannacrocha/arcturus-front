@@ -16,7 +16,7 @@ export class AudioPlayerComponent implements OnInit {
   contents: any[] = [];
   searchTerm: string = '';
   
-  // 🚀 Ajuste aqui para usar apiRoot + o caminho
+
   private apiUrl = `${environment.apiRoot}/v1/contents`;
 
   constructor(private http: HttpClient) {}

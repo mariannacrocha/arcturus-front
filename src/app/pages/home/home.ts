@@ -17,7 +17,7 @@ export class HomeComponent {
   searchQuery: string = '';
   contents: any[] = [];
   
-  // 🚀 Define a base da URL de conteúdos dinamicamente
+
   private apiUrl = `${environment.apiRoot}/v1/contents`;
 
   constructor(

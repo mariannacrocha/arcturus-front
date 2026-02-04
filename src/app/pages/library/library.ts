@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment'; // 👈 Importa
 })
 export class LibraryComponent {
   contents: any[] = [];
-  // 🚀 URL Dinâmica
+
   private apiUrl = `${environment.apiRoot}/v1/contents`;
 
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) {

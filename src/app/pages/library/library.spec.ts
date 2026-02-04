@@ -1,23 +1,30 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { LibraryComponent } from './library';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { AuthService } from '../../services/auth';
 
-import { Library } from './library';
-
-describe('Library', () => {
-  let component: Library;
-  let fixture: ComponentFixture<Library>;
+describe('LibraryComponent', () => {
+  let component: LibraryComponent;
+  let fixture: ComponentFixture<LibraryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Library]
+      imports: [LibraryComponent],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        AuthService
+      ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Library);
+    fixture = TestBed.createComponent(LibraryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('deve criar o componente', () => {
     expect(component).toBeTruthy();
   });
 });

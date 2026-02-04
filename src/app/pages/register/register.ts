@@ -17,12 +17,10 @@ export class RegisterComponent {
   confirmPassword = '';
   errorMessage = '';
 
-  // Variável para controlar se mostra a senha ou não
   showPassword = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  // Função que alterna entre ver e esconder
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
@@ -30,14 +28,12 @@ export class RegisterComponent {
   onRegister() {
     this.errorMessage = '';
 
-    // 1. Campos vazios
     if (!this.username || !this.password) {
       this.errorMessage = 'Preencha todos os campos.';
       return;
     }
 
-    // 2. Validação de Senha Forte (Letras E Números, min 6 chars)
-    // Regex: Pelo menos uma letra, pelo menos um número.
+   
     const senhaForte = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
     
     if (!senhaForte.test(this.password)) {
@@ -45,7 +41,7 @@ export class RegisterComponent {
       return;
     }
 
-    // 3. Validação de confirmação
+    
     if (this.password !== this.confirmPassword) {
       this.errorMessage = 'As senhas não coincidem!';
       return;
@@ -59,7 +55,7 @@ export class RegisterComponent {
         },
         error: (err) => {
           console.error(err);
-          // 4. Tratamento específico para usuário duplicado
+        
           if (err.status === 409) {
             this.errorMessage = 'Este nome de usuário já está em uso.';
           } else {
