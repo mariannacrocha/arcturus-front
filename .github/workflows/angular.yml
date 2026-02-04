@@ -1,17 +1,13 @@
-name: Frontend CI (Angular)
+name: Angular Frontend CI
 
 on:
   push:
     branches: [ "main", "master" ]
-    paths:
-      - 'src/app/**' # Só roda se mexer no front
-      - 'package.json'
-      - 'angular.json'
   pull_request:
     branches: [ "main", "master" ]
 
 jobs:
-  test-frontend:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,13 +17,13 @@ jobs:
     - name: Configurar Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18' # Ou '20', compatível com Angular 18
+        node-version: '18'
         cache: 'npm'
 
     - name: Instalar Dependências
       run: npm ci
 
     - name: Rodar Testes (Chrome Headless)
-      # --no-watch: Roda uma vez e para (não fica esperando mudanças)
-      # --browsers=ChromeHeadless: Roda sem abrir janela
+      # --no-watch: Roda uma vez e para
+      # --browsers=ChromeHeadless: Roda sem precisar de tela
       run: npx ng test --no-watch --browsers=ChromeHeadless
