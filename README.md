@@ -1,120 +1,63 @@
-# 🌌 Arcturus Stream
-> **Conexão e Expansão de Consciência através de Frequências Sonoras.**
 
-![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-![AWS S3](https://img.shields.io/badge/AWS_S3-569A31?style=for-the-badge&logo=amazon-s3&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+# 🌌 Arcturus Stream Frontend
+
+![Angular CI](https://github.com/mariannacrocha/arcturus-front/actions/workflows/angular.yml/badge.svg)
+![Angular](https://img.shields.io/badge/Angular-19-red)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+
+Interface moderna e responsiva para a plataforma **Arcturus Stream**, desenvolvida com **Angular 19**. Oferece uma experiência fluida para descoberta e reprodução de frequências vibracionais.
+---
+
+## 🎨 Funcionalidades
+
+* **Autenticação Segura:** Login e Registro com validação de força de senha e proteção de rotas (Guards).
+* **Player de Áudio:** Componente customizado para reprodução de áudio via streaming (S3 ou External).
+* **Biblioteca Pessoal:** Gerenciamento de favoritos e uploads do usuário.
+* **Busca Híbrida:** Interface unificada que exibe resultados locais e da web.
 
 ---
 
-## 💻 Sobre o Projeto
+## 🚀 Tecnologias
 
-O **Arcturus Stream** é uma aplicação Full Stack desenvolvida para agregar, reproduzir e gerenciar áudios de meditação e frequências sonoras (432Hz, 528Hz, etc.). O sistema permite buscar faixas em APIs externas, reproduzi-las em um player integrado e salvar as favoritas em uma biblioteca pessoal na nuvem.
-
-O projeto foi construído com foco em **Arquitetura Distribuída**, **Clean Code** e **Cloud Deployment**.
-
-### 🎥 Live Demo
-👉 **Acesse o projeto online:** [https://arcturus-front.vercel.app/]
-
+* **Framework:** Angular 19 (Standalone Components, Signals).
+* **Linguagem:** TypeScript.
+* **Estilização:** CSS3 Moderno (Flexbox/Grid, Variáveis CSS, Design Responsivo).
+* **Qualidade:** Testes unitários com Jasmine e Karma.
+* **CI/CD:** Pipeline de testes automatizados no GitHub Actions (ChromeHeadless).
+  
 ---
 
 ## 📸 Screenshots
 
-<div align="center">
-  <img width="1035" height="241" alt="Tela de Busca" src="https://github.com/user-attachments/assets/a5011ff3-1071-4c0f-b4fa-d66585b63a21" />
- <img width="1680" height="891" alt="image" src="https://github.com/user-attachments/assets/3f4271bf-f03a-41a9-a239-4c3b0d2c1f79" />
-
-</div>
-
-
----
-
-## 🛠 Tecnologias Utilizadas
-
-### **Frontend (Client-Side)**
-* **Framework:** Angular 17+ (Standalone Components)
-* **Linguagem:** TypeScript
-* **Estilização:** CSS3 Moderno (Grid & Flexbox), Design System com Dark Mode
-* **Hospedagem:** Vercel
-
-### **Backend (Server-Side)**
-* **Linguagem:** Java 21
-* **Framework:** Spring Boot 3
-* **Arquitetura:** REST API, DTO Pattern
-* **Containerização:** Docker (Dockerfile otimizado)
-* **Hospedagem:** Render
-
-### **Dados & Infraestrutura**
-* **Banco de Dados:** PostgreSQL (Hospedado no Neon Tech)
-* **Armazenamento de Arquivos:** AWS S3 (Amazon Web Services)
-* **Integrações:** Jamendo API (Busca de faixas externas)
+<img width="1496" height="800" alt="image" src="https://github.com/user-attachments/assets/502e6336-5931-4c23-b2e8-731000d5f158" />
+<img width="1292" height="751" alt="image" src="https://github.com/user-attachments/assets/53a2e95c-fc74-45a2-8db2-7f29705102d2" />
+<img width="1817" height="652" alt="image" src="https://github.com/user-attachments/assets/1ad6ab88-0bff-4461-9212-bfb97846d422" />
+<img width="1741" height="666" alt="image" src="https://github.com/user-attachments/assets/626df2c9-9d76-4103-a7c9-6bae053bf2df" />
+<img width="1863" height="418" alt="image" src="https://github.com/user-attachments/assets/34ebba17-1a86-4294-bb6c-4588d8102a9f" />
 
 ---
 
-## ✨ Funcionalidades
+## 🔧 Instalação e Execução
 
-- [x] **Busca Inteligente:** Pesquisa de músicas e frequências integrada à API do Jamendo.
-- [x] **Player de Áudio:** Reprodução contínua com controles nativos.
-- [x] **Biblioteca Pessoal:** Capacidade de importar músicas externas e salvar permanentemente no banco de dados.
-- [x] **Upload Cloud:** Integração com AWS S3 para persistência de arquivos de mídia.
-- [x] **Design Responsivo:** Interface adaptável para Desktop, Tablet e Mobile.
-- [x] **Feedback Visual:** Sistema de notificações (Toasts) e tratamentos de erro amigáveis.
+1. **Instale as dependências:**
+   O projeto requer **Node.js 20+**.
+   ```bash
+   npm install
+   ```
 
----
-
-## 🚀 Como Rodar Localmente
-
-### Pré-requisitos
-* Node.js e Angular CLI
-* Java JDK 21
-* Docker (Opcional, mas recomendado)
-* PostgreSQL
-
-### 1. Backend (API)
+Servidor de Desenvolvimento:
 ```bash
-
-# Clone o repositório da API
-git clone https://github.com/mariannacrocha/arcturus-api.git
-
-# Entre na pasta
-cd arcturus-api
-
-# Configure as variáveis de ambiente (application.yml)
-# (Necessário chaves da AWS e Banco de Dados)
-
-# Rode a aplicação
-./mvnw spring-boot:run
-
-# Clone o repositório do Front
-git clone https://github.com/mariannacrocha/arcturus-front.git
-
-# Instale as dependências
-npm install
-
-# Rode o servidor de desenvolvimento
 ng serve
 ```
----
-## ☁️ Arquitetura de Deploy
-
-O sistema opera em um ambiente 100% Cloud (Serverless/PaaS):
-
-```mermaid
-graph LR
-A["Usuário / Browser"] -- HTTPS --> B["Vercel (Angular)"]
-    B -- REST API --> C["Render (Spring Boot)"]
-    C -- SQL --> D["Neon (PostgreSQL)"]
-    C -- Upload/Stream --> E["AWS S3 Bucket"]
-    C -- External API --> F["Jamendo API"]
+Acesse http://localhost:4200.
+Rodar Testes:
+```bash
+ng test
 ```
-
 ---
 
-👩‍💻 Autora
-Desenvolvido por Marianna.
+🌐 Deploy
+O projeto está configurado para deploy automático na Vercel, conectando-se ao backend hospedado no Render. As URLs de API são gerenciadas via environment.prod.ts.
 
-
-    
+---
+Desenvolvido por Marianna Rocha
