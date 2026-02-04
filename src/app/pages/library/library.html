@@ -1,0 +1,34 @@
+<div class="main-container">
+  <header>
+    <h1>💾 Minha Coleção Pessoal</h1>
+    <div>
+      <button class="nav-btn" (click)="goToSearch()">🔍 Ir para Busca</button>
+    </div>
+  </header>
+
+  @if (contents.length === 0) {
+    <div class="empty-state">
+      <p>Sua biblioteca está vazia.</p>
+      <button (click)="goToSearch()">Descobrir Músicas</button>
+    </div>
+  }
+
+  <div class="grid">
+    @for (item of contents; track item) {
+      <div class="card">
+        <div class="header-card">
+          <div class="badge">SALVO</div>
+          <button class="delete-icon" (click)="deleteContent(item.id)">🗑️</button>
+        </div>
+
+        <h3>{{ item.description }}</h3>
+        
+        @if (item.frequencyHz) {
+          <p class="freq">{{ item.frequencyHz }} Hz</p>
+        }
+
+        <audio controls [src]="item.s3Url" class="audio-player"></audio>
+      </div>
+    }
+  </div>
+</div>

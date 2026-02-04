@@ -1,0 +1,46 @@
+<div class="main-container">
+<header>
+    <h1>🌌 Explorar Frequências</h1>
+    <div>
+      <button class="library-btn" (click)="router.navigate(['/library'])">📚 Minha Biblioteca</button>
+      <button class="logout-btn" (click)="onLogout()">Sair</button>
+    </div>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" 
+           [(ngModel)]="searchQuery" 
+           (keyup.enter)="onSearch()" 
+           placeholder="Busque frequências ou meditações...">
+    <button (click)="onSearch()">Buscar</button>
+  </div>
+
+  <div class="grid">
+    @for (item of contents; track item) {
+      <div class="card">
+        
+        @if (item.id) {
+          <div class="header-card">
+            <div class="badge">MINHA BIBLIOTECA</div>
+            <button class="delete-icon" (click)="deleteContent(item.id)" title="Remover">🗑️</button>
+          </div>
+        }
+
+        <h3>{{ item.description }}</h3>
+        
+        @if (item.frequencyHz) {
+          <p class="freq">{{ item.frequencyHz }} Hz</p>
+        }
+
+        <audio controls [src]="item.s3Url" class="audio-player"></audio>
+        
+        @if (!item.id) {
+          <button class="save-btn" (click)="importContent(item)">
+            💾 Salvar na Biblioteca
+          </button>
+        }
+        
+      </div>
+    }
+  </div>
+</div>

@@ -1,16 +1,13 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-// 1. O caminho deve apontar para o nome real do arquivo no seu Explorer
-import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
+import { RouterOutlet } from '@angular/router'; // 👈 1. Importe isso
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  // 2. Garantindo que o componente filho seja reconhecido
-  imports: [CommonModule, AudioPlayerComponent],
-  templateUrl: './app.html', // No seu print, o arquivo HTML se chama apenas app.html
-  styleUrls: ['./app.css']   // No seu print, o arquivo CSS se chama apenas app.css
+  imports: [RouterOutlet], // 👈 2. Adicione aqui nos imports
+  templateUrl: './app.html',
+  styleUrl: './app.css'
 })
 export class AppComponent {
-  title = 'arcturus-frontend';
+  title = 'arcturus-stream-front';
 }

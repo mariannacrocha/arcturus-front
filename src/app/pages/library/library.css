@@ -1,0 +1,198 @@
+/* Container Principal (Fundo Espacial) */
+.main-container {
+  min-height: 100vh; /* Garante que cubra a tela toda */
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: white;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Cabeçalho */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #a5f3fc; /* Ciano claro */
+  margin: 0;
+}
+
+/* Botão de Sair */
+.logout-btn {
+  background: transparent;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.logout-btn:hover {
+  background: #ef4444;
+  color: white;
+}
+
+/* Barra de Busca */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  outline: none;
+}
+
+.search-bar input:focus {
+  border-color: #38bdf8;
+}
+
+.search-bar button {
+  padding: 0 24px;
+  background: #8b5cf6; /* Roxo */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background: #7c3aed;
+}
+
+/* Grade de Cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Card Individual (Efeito Vidro) */
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #38bdf8;
+}
+
+.badge {
+  display: inline-block;
+  background: #10b981; /* Verde */
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.freq {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* Player de Áudio */
+.audio-player {
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+  border-radius: 20px;
+}
+
+/* Botão de Salvar (para músicas externas) */
+.save-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+/* Organiza o topo do card (Badge + Lixeira) */
+.header-card {
+  display: flex;
+  justify-content: space-between; /* Um em cada ponta */
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+/* O Badge não precisa mais de margin-bottom, pois está dentro do header */
+.badge {
+  margin-bottom: 0;
+}
+
+/* Ícone de Lixeira */
+.delete-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0 5px;
+  opacity: 0.6;
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+.delete-icon:hover {
+  opacity: 1;
+  transform: scale(1.2); /* Aumenta um pouquinho ao passar o mouse */
+}
+
+.nav-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid white;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.nav-btn:hover {
+  background: white;
+  color: #0f172a;
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 50px;
+  color: #94a3b8;
+}

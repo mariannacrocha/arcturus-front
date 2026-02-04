@@ -1,0 +1,34 @@
+<div class="login-container">
+  <div class="login-card">
+    <h1>🌌 Arcturus Stream</h1>
+    <p>Conecte-se às frequências.</p>
+
+    <div class="form-group">
+      <label>Usuário</label>
+      <input type="text" [(ngModel)]="username" placeholder="Digite seu usuário">
+    </div>
+
+    <div class="form-group">
+      <label>Senha</label>
+      <div class="password-wrapper">
+        <input [type]="showPassword ? 'text' : 'password'" 
+               [(ngModel)]="password" 
+               placeholder="Digite sua senha">
+        
+        <span class="eye-icon" (click)="togglePasswordVisibility()">
+          {{ showPassword ? '🙈' : '👁️' }}
+        </span>
+      </div>
+    </div>
+
+    @if (errorMessage) {
+      <div class="error-msg">{{ errorMessage }}</div>
+    }
+
+    <button (click)="onLogin()">Entrar</button>
+
+    <div class="footer">
+      <p>Ainda não tem conta? <a routerLink="/register" class="link-register">Cadastre-se</a></p>
+    </div>
+  </div>
+</div>
