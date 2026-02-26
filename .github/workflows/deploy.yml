@@ -2,7 +2,7 @@ name: Deploy Frontend to Oracle Cloud
 
 on:
   push:
-    branches: [ main ] #
+    branches: [ main ]
 
 jobs:
   deploy:
