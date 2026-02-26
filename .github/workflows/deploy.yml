@@ -1,0 +1,21 @@
+name: Deploy Frontend to Oracle Cloud
+
+on:
+  push:
+    branches: [ main ] #
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH e Deploy do Frontend
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/arcturus-project/arcturus-front
+            git pull origin main
+            cd ..
+            docker-compose up -d --build front
